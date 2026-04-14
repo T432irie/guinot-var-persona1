@@ -74,6 +74,12 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  background: #1a0a0a;
+}
+@media (min-width: 431px) {
+  html {
+    background: #1a0a0a url('images/backgraund.png') center top / cover no-repeat fixed;
+  }
 }
 
 body {
@@ -83,10 +89,12 @@ body {
   background: #1a0a0a;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  max-width: 750px;
+  width: 100%;
+  max-width: 430px;
   margin: 0 auto;
   box-shadow: 0 0 60px rgba(196,163,90,0.08), 0 0 30px rgba(0,0,0,0.3);
   padding-bottom: 0;
+  position: relative;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -222,82 +230,98 @@ ul { list-style: none; }
 /* ========== Hero ========== */
 .hero {
   position: relative;
-  background: #0f0505;
   color: var(--color-white);
   overflow: hidden;
   padding: 0;
   min-height: 0;
+  background: #c8b8a0;
 }
 
 .hero__bg {
   position: relative;
   width: 100%;
+  min-height: 100svh;
+  background: #c8b8a0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 8vh;
 }
 
-.hero__bg img {
-  width: 100%;
-  height: auto;
-  display: block;
+.hero__video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.15);
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .hero__bg::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  height: 40%;
-  background: linear-gradient(to bottom, transparent 0%, rgba(26,15,15,0.85) 100%);
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(15,5,5,0.1) 0%, rgba(15,5,5,0.05) 25%, rgba(15,5,5,0.2) 50%, rgba(15,5,5,0.45) 75%, rgba(15,5,5,0.6) 100%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .hero__inner {
   position: relative;
   z-index: 2;
-  padding: 0 0 48px;
-  background: linear-gradient(180deg, rgba(15,5,5,0.7) 0%, #0f0505 30%);
+  padding: 0;
+  text-align: left;
 }
 
 .hero__logo {
-  font-family: var(--font-en);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
 }
 
-.hero__logo::before {
-  content: '';
-  width: 40px;
-  height: 1px;
-  background: var(--gradient-gold);
-  box-shadow: 0 0 8px rgba(196,163,90,0.4);
+.hero__logo img {
+  height: 32px;
+  width: auto;
+}
+
+.hero__france-badge {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #a08030 0%, #c4a35a 40%, #dcc07a 60%, #c4a35a 100%);
+  padding: 8px 22px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
 }
 
 .hero__title {
   font-weight: 700;
-  line-height: 1.55;
+  line-height: 1.4;
   color: var(--color-white);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .hero__title-main {
-  font-size: 2.2rem;
+  font-size: clamp(30px, 8.5vw, 42px);
   font-weight: 900;
   display: block;
-  margin-bottom: 10px;
-  line-height: 1.5;
-  background: linear-gradient(90deg, #ffffff 0%, #dcc07a 25%, #c4a35a 50%, #dcc07a 75%, #ffffff 100%);
+  margin-bottom: 8px;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #c4a35a 0%, #e8d48a 25%, #f5ecc8 50%, #e8d48a 75%, #a08030 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gold-shimmer 4s ease-in-out infinite;
+  filter: drop-shadow(0 2px 8px rgba(196,163,90,0.4));
 }
 
 @keyframes gold-shimmer {
@@ -308,12 +332,22 @@ ul { list-style: none; }
 
 .hero__title-sub {
   display: block;
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.9);
+  font-size: clamp(12px, 3.2vw, 15px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
   letter-spacing: 0.04em;
-  line-height: 1.6;
-  margin-top: 14px;
+  line-height: 1.7;
+  margin-top: 6px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+
+.hero__brand-img {
+  display: block;
+  width: 92%;
+  max-width: 380px;
+  margin-bottom: 20px;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
 }
 
 .hero__device {
@@ -342,56 +376,50 @@ ul { list-style: none; }
   font-size: 0.82rem;
 }
 
-/* Hero Icon Badges */
-.hero__icons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 32px;
-}
-
-.hero__icon-badge {
+/* Hero Point Badges */
+.hero__points {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: linear-gradient(135deg, rgba(196,163,90,0.08) 0%, rgba(139,26,26,0.1) 100%);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(196,163,90,0.25);
-  border-radius: var(--radius-md);
-  padding: 14px 10px;
-  min-width: 120px;
-  flex: 1;
-  max-width: 140px;
-  text-align: center;
+  gap: 10px;
+  margin-top: 24px;
 }
 
-.hero__icon-badge-icon {
-  width: 28px;
-  height: 28px;
+.hero__point {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-.hero__icon-badge-icon svg {
+  gap: 12px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  border-radius: 6px;
+  padding: 14px 20px;
+  border-left: 3px solid var(--color-gold);
   width: 100%;
-  height: 100%;
 }
 
-.hero__icon-badge-text {
-  font-size: 0.68rem;
+.hero__point-label {
+  font-family: var(--font-en);
+  font-size: 0.65rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.1em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.hero__point-num {
+  font-family: var(--font-en);
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #fff;
+  margin-left: 2px;
+}
+
+.hero__point-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
   letter-spacing: 0.02em;
   line-height: 1.4;
-}
-
-.hero__icon-badge-text strong {
-  display: block;
-  font-size: 0.82rem;
-  color: var(--color-gold-light);
 }
 
 /* ========== Problem Section ========== */
@@ -457,6 +485,7 @@ ul { list-style: none; }
 .problem__list {
   max-width: 720px;
   margin: 0 auto;
+  text-align: left;
 }
 
 .problem__item {
@@ -499,6 +528,7 @@ ul { list-style: none; }
   font-size: 0.95rem;
   line-height: 1.85;
   color: rgba(255,255,255,0.82);
+  text-align: left;
 }
 
 .problem__text strong {
@@ -525,13 +555,17 @@ ul { list-style: none; }
   border-top: 30px solid #1a0a0a;
 }
 
+.section-arrow__triangle--skin {
+  border-top-color: #a89868;
+}
+
 /* ========== Solution / Affinity ========== */
 .affinity {
   background: var(--color-bg);
 }
 
 .affinity__main {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #7a0c28 0%, #b6123a 50%, #7a0c28 100%);
   color: var(--color-white);
   border-radius: var(--radius-lg);
   padding: 56px 48px;
@@ -956,15 +990,15 @@ ul { list-style: none; }
 }
 
 .reason-card__highlight {
-  background: linear-gradient(135deg, #f9f4eb 0%, #f5eed4 100%);
-  border-left: 4px solid var(--color-gold);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  padding: 18px 22px;
+  background: none;
+  border-left: none;
+  border-radius: 0;
+  padding: 16px 0;
   margin: 20px 0;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   line-height: 1.9;
-  color: var(--color-primary);
-  font-weight: 600;
+  color: #8b1a1a;
+  font-weight: 900;
   box-shadow: 0 2px 12px rgba(196,163,90,0.08);
 }
 
@@ -1094,14 +1128,14 @@ ul { list-style: none; }
 }
 
 .result-ba__pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 .result-ba__photo {
   position: relative;
-  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #e8ecf2;
   display: flex;
@@ -1111,74 +1145,103 @@ ul { list-style: none; }
 
 .result-ba__photo img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
 }
 
-.result-ba__placeholder {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: rgba(100,100,100,0.6);
-  text-align: center;
-  padding: 8px;
+.result-ba__labels {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
 }
 
 .result-ba__label {
-  position: absolute;
-  bottom: 6px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
   text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-  letter-spacing: 0.05em;
 }
 
-.result-ba__label--before { left: 10px; }
-.result-ba__label--after { right: 10px; }
+.result-ba__label--before { background: linear-gradient(135deg, rgba(0,0,0,0.5), transparent); }
+.result-ba__label--after { background: linear-gradient(225deg, rgba(196,163,90,0.7), transparent); }
 
 /* ========== 5 Reasons ========== */
 .five-reasons {
-  background: var(--color-bg);
+  background: #f7f5f2;
 }
 
 .five-reason {
-  margin-bottom: 48px;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  margin-top: 18px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.five-reason:last-child {
-  margin-bottom: 0;
+.text-center + .five-reason {
+  margin-top: 28px;
+}
+
+.five-reason__img {
+  width: 100%;
+  height: 220px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.five-reason__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.five-reason__body {
+  flex: 1;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .five-reason__num {
   font-family: var(--font-en);
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 800;
-  background: var(--gradient-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: 0.3;
+  color: var(--color-primary);
+  opacity: 0.25;
   line-height: 1;
   margin-bottom: 8px;
 }
 
 .five-reason__title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.5;
   margin-bottom: 14px;
   color: var(--color-primary);
 }
 
 .five-reason__text {
   font-size: 0.88rem;
-  line-height: 2;
+  line-height: 1.85;
   color: var(--color-text-secondary);
 }
 
 .five-reason__text p {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .five-reason__text p:last-child {
@@ -1254,11 +1317,12 @@ ul { list-style: none; }
 }
 
 .pricing__label {
-  font-size: 0.78rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--color-accent);
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .pricing__title {
@@ -1506,45 +1570,41 @@ ul { list-style: none; }
 
 /* Mid CTA (reused) */
 .mid-cta {
-  background: var(--gradient-hero);
-  padding: 64px 0;
+  background: linear-gradient(135deg, #7a0c28 0%, #b6123a 50%, #7a0c28 100%);
+  padding: 48px 0;
   position: relative;
   overflow: hidden;
 }
 
-.mid-cta::before {
-  content: '';
-  position: absolute;
-  top: -50%; right: -20%;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(196,163,90,0.08) 0%, transparent 60%);
-  pointer-events: none;
-}
-
 .mid-cta__inner {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   position: relative;
   z-index: 1;
 }
 
+.mid-cta__content {
+  width: 100%;
+  text-align: center;
+}
+
 .mid-cta__lead {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 900;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   letter-spacing: 0.04em;
-  background: linear-gradient(135deg, #dcc07a 0%, #c4a35a 50%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  line-height: 1.6;
 }
 
 .mid-cta__text {
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.9);
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.85);
   line-height: 1.8;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .mid-cta .btn--primary {
@@ -1552,14 +1612,17 @@ ul { list-style: none; }
   background: linear-gradient(135deg, #a08030 0%, #c4a35a 30%, #dcc07a 50%, #c4a35a 70%, #a08030 100%);
   color: #0f0505;
   font-weight: 900;
-  font-size: 1.4rem;
-  padding: 24px 40px;
+  font-size: 1.1rem;
+  padding: 18px 28px;
   letter-spacing: 0.03em;
   border: none;
-  box-shadow: 0 10px 34px rgba(0,0,0,0.3), 0 10px 28px rgba(196,163,90,0.35);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3), 0 4px 16px rgba(196,163,90,0.35);
   animation: cta-pulse 2.4s ease-in-out infinite;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
+  justify-content: center;
+  border-radius: var(--radius-md);
 }
 
 .mid-cta .btn--primary::after {
@@ -1577,6 +1640,13 @@ ul { list-style: none; }
   transform: translateY(-2px);
 }
 
+.mid-cta__img {
+  width: 140px;
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+}
+
 @keyframes cta-pulse {
   0%, 100% { box-shadow: 0 4px 20px rgba(196,163,90,0.3); transform: scale(1); }
   50% { box-shadow: 0 6px 32px rgba(196,163,90,0.5); transform: scale(1.03); }
@@ -1590,88 +1660,100 @@ ul { list-style: none; }
 
 /* ========== Final CTA ========== */
 .final-cta {
-  background: var(--gradient-cta);
+  background: linear-gradient(135deg, #7a0c28 0%, #b6123a 50%, #7a0c28 100%);
   color: var(--color-white);
-  padding: 80px 0;
+  padding: 60px 0;
   position: relative;
   overflow: hidden;
 }
 
-.final-cta::before {
-  content: '';
-  position: absolute;
-  top: -40%; right: -10%;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(196,163,90,0.06) 0%, transparent 60%);
-  border-radius: 50%;
-  pointer-events: none;
+.final-cta__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.final-cta__content {
+  flex: 1;
+  text-align: left;
 }
 
 .final-cta__lead {
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.9);
-  margin-bottom: 14px;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 10px;
   line-height: 1.8;
 }
 
 .final-cta__title {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 900;
-  line-height: 1.8;
-  margin-bottom: 14px;
+  line-height: 1.7;
+  margin-bottom: 20px;
   color: #ffffff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .final-cta__title .hl {
-  background: linear-gradient(90deg, #ffffff 0%, #dcc07a 25%, #c4a35a 50%, #dcc07a 75%, #ffffff 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gold-shimmer 4s ease-in-out infinite;
-}
-
-.final-cta__sub {
-  font-size: 0.92rem;
-  color: rgba(255,255,255,0.88);
-  line-height: 1.9;
-  margin-bottom: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.final-cta__image-placeholder {
-  width: 80%;
-  max-width: 400px;
-  aspect-ratio: 4/3;
-  margin: 0 auto 36px;
-  background: rgba(255,255,255,0.06);
-  border: 1px dashed rgba(255,255,255,0.2);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.35);
-  font-size: 0.82rem;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
 }
 
 .final-cta__buttons {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  align-items: center;
-  max-width: 400px;
-  margin: 0 auto;
+  gap: 12px;
+  max-width: 100%;
 }
 
 .final-cta__buttons .btn {
   width: 100%;
-  padding: 20px 24px;
-  font-size: 1.05rem;
+  padding: 18px 24px;
+  font-size: 1rem;
   font-weight: 900;
   border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.final-cta__img {
+  width: 160px;
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.4));
+}
+
+/* Form Section */
+.form-section {
+  background: linear-gradient(180deg, #faf8f4 0%, #f5f0e8 100%);
+  padding: 48px 0 60px;
+}
+
+.form-section__title {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--color-text);
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.form-section__sub {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.form-section__iframe-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.form-section__iframe-wrap iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  overflow: hidden;
 }
 
 .btn--cta-primary {
@@ -1711,6 +1793,161 @@ ul { list-style: none; }
 
 .btn--cta-outline:hover {
   background: rgba(196,163,90,0.15);
+}
+
+/* ========== Offer Section ========== */
+.offer {
+  background: linear-gradient(180deg, #0a1520 0%, #0f1e2e 40%, #0a1520 100%);
+  padding: 56px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.offer__card {
+  background: linear-gradient(145deg, #c9a84c 0%, #e8d48a 15%, #c4a35a 35%, #a88a30 60%, #c4a35a 80%, #e8d48a 100%);
+  border-radius: 12px;
+  padding: 28px 20px;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.offer__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.offer__badge-label {
+  background: #1a1a1a;
+  color: #e8d48a;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+}
+
+.offer__badge-text {
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #1a1a1a;
+}
+
+.offer__card-title {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.offer__benefit {
+  background: rgba(30,30,30,0.85);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.offer__benefit-main {
+  flex: 1;
+}
+
+.offer__benefit-img {
+  width: 100px;
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.offer__benefit-num {
+  font-family: var(--font-en);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #c4a35a;
+  letter-spacing: 0.05em;
+  background: #1a0f0a;
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.offer__benefit-title {
+  font-size: 0.88rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.offer__benefit-note {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+.offer__benefit--outline {
+  background: transparent;
+  border: 1.5px solid rgba(30,30,30,0.3);
+  padding: 12px 16px;
+}
+
+.offer__benefit--outline .offer__benefit-note {
+  color: #1a1a1a;
+}
+
+.offer__benefit--outline .offer__benefit-title {
+  color: #1a1a1a;
+  font-size: 1.05rem;
+}
+
+.offer__benefit--outline .offer__benefit-num {
+  color: #c4a35a;
+  background: #1a0f0a;
+}
+
+.offer__bottom {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.offer__bottom-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.offer__bottom-text {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.offer__btn {
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #a08030 0%, #c4a35a 30%, #dcc07a 50%, #c4a35a 70%, #a08030 100%);
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(196,163,90,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.offer__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(196,163,90,0.5);
 }
 
 /* ========== Footer ========== */
@@ -1755,14 +1992,12 @@ ul { list-style: none; }
   display: block;
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
   z-index: 1000;
-  background: linear-gradient(135deg, rgba(15,5,5,0.97), rgba(26,10,10,0.97));
-  backdrop-filter: blur(8px);
-  padding: 10px 16px;
-  box-shadow: 0 -2px 20px rgba(0,0,0,0.3);
-  border-top: 1px solid rgba(196,163,90,0.2);
+  padding: 0;
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
@@ -1772,34 +2007,20 @@ ul { list-style: none; }
   pointer-events: none;
 }
 
-@media (min-width: 751px) {
-  .floating-cta {
-    padding: 14px 20px 16px;
-    left: 50%;
-    right: auto;
-    width: 750px;
-    margin-left: -375px;
-    box-sizing: border-box;
-  }
-}
-
-.floating-cta .btn {
-  width: 100%;
-  padding: 14px 18px;
-}
-
 .floating-cta__btn {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 16px 20px !important;
-  overflow: hidden;
-  background: linear-gradient(135deg, #a08030 0%, #c4a35a 30%, #dcc07a 50%, #c4a35a 70%, #a08030 100%) !important;
-  color: #0f0505 !important;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.3), 0 6px 18px rgba(196,163,90,0.35) !important;
-  border-radius: var(--radius-md) !important;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0 !important;
+  overflow: visible;
+  background: linear-gradient(135deg, #7a0c28 0%, #b6123a 50%, #7a0c28 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.3) !important;
+  border-radius: 0 !important;
+  width: 100%;
+  text-decoration: none;
 }
 
 .floating-cta__btn::after {
@@ -1807,7 +2028,7 @@ ul { list-style: none; }
   position: absolute;
   top: 0; left: -100%;
   width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
   animation: floating-cta-shimmer 3s ease-in-out infinite;
   pointer-events: none;
 }
@@ -1822,159 +2043,492 @@ ul { list-style: none; }
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  line-height: 1.15;
+  align-items: flex-start;
+  line-height: 1.2;
   gap: 6px;
+  padding: 16px 20px;
+  flex: 1;
 }
 
 .floating-cta__line1 {
   font-weight: 700;
-  letter-spacing: 0.02em;
-  font-size: 0.72em;
-  opacity: 0.9;
+  letter-spacing: 0.04em;
+  font-size: 0.78em;
+  opacity: 0.95;
+  background: rgba(196,163,90,0.35);
+  padding: 3px 12px;
+  border-radius: 3px;
 }
 
 .floating-cta__line2 {
   font-weight: 900;
   letter-spacing: 0.02em;
-  font-size: 1.2em;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  font-size: 1.3em;
 }
 
-/* ========== Responsive (SP-first: 375px optimized) ========== */
-@media (max-width: 640px) {
-  html { font-size: 15px; }
-  .container { padding: 0 18px; }
-  .section-padding { padding: 52px 0; }
-  .section-num { font-size: 0.65rem; letter-spacing: 2px; margin-bottom: 12px; }
-  .section-title { font-size: 1.25rem; line-height: 1.7; }
-  .section-title--xl { font-size: 1.35rem; }
-  .section-sub { font-size: 0.88rem; line-height: 1.85; }
-  .section-line { width: 60px; margin: 16px auto; }
-
-  /* Hero */
-  .hero__inner { padding: 24px 0 32px; }
-  .hero__logo { margin-bottom: 20px; }
-  .hero__title-main { font-size: 1.7rem; line-height: 1.5; margin-bottom: 8px; }
-  .hero__title-sub { font-size: 0.92rem; line-height: 1.65; margin-top: 10px; }
-
-  .hero__icons {
-    gap: 6px;
-    margin-top: 24px;
-  }
-  .hero__icon-badge {
-    min-width: 0;
-    max-width: none;
-    flex: 1 1 28%;
-    padding: 10px 6px;
-  }
-  .hero__icon-badge-icon { width: 22px; height: 22px; }
-  .hero__icon-badge-text { font-size: 0.6rem; line-height: 1.35; }
-  .hero__icon-badge-text strong { font-size: 0.7rem; }
-
-  /* Problem */
-  .problem .section-title { font-size: 1.2rem; }
-  .problem .section-sub { font-size: 1.1rem; }
-  .problem__inner { padding: 20px 16px; margin-top: 28px; }
-  .problem__item { padding: 14px 0; gap: 12px; }
-  .problem__text { font-size: 0.88rem; line-height: 1.75; }
-
-  /* Affinity */
-  .affinity__main { padding: 28px 20px; }
-  .affinity__main-title { font-size: 1.05rem; line-height: 1.85; }
-  .affinity__main-title .hl { font-size: 1.2rem; }
-
-  /* Brand */
-  .brand__desc { font-size: 0.85rem; line-height: 1.95; padding: 0 4px; }
-  .brand__highlight-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .brand__highlight-card { padding: 16px 12px; }
-  .brand__highlight-card-num { font-size: 1.4rem; }
-  .brand__highlight-card-title { font-size: 0.75rem; }
-
-  /* VAR Intro */
-  .var-intro__effect-item { padding: 12px 14px; }
-  .var-intro__effect-text { font-size: 0.85rem; }
-
-  /* Reasons */
-  .reason-card { margin-bottom: 36px; }
-  .reason-card__header { gap: 10px; margin-bottom: 16px; }
-  .reason-card__check { width: 28px; height: 28px; font-size: 0.8rem; }
-  .reason-card__title { font-size: 0.95rem; line-height: 1.6; }
-  .reason-card__body { padding-left: 0; font-size: 0.85rem; line-height: 1.95; }
-  .reason-card__highlight { padding: 14px 16px; font-size: 0.85rem; }
-
-  .formula-box { padding: 22px 18px; margin: 20px 0; }
-  .formula-box__title { font-size: 0.75rem; }
-  .formula-box__items { flex-direction: column; gap: 6px; }
-  .formula-box__item { padding: 8px 14px; font-size: 0.8rem; }
-  .formula-box__operator { font-size: 1rem; }
-  .formula-box__result { font-size: 0.9rem; }
-
-  .data-stats { gap: 8px; margin: 18px 0; }
-  .data-stat { padding: 14px 10px; }
-  .data-stat__num { font-size: 1.5rem; }
-  .data-stat__label { font-size: 0.68rem; }
-
-  /* Flow */
-  .flow__steps { margin-top: 28px; }
-  .flow__step { padding: 16px 0; }
-  .flow__step-num { width: 32px; height: 32px; font-size: 0.75rem; }
-  .flow__step-title { font-size: 0.88rem; }
-
-  /* 5 Reasons */
-  .five-reason { margin-bottom: 36px; }
-  .five-reason__num { font-size: 2rem; }
-  .five-reason__title { font-size: 0.95rem; line-height: 1.65; }
-  .five-reason__text { font-size: 0.82rem; line-height: 1.95; }
-
-  /* Testimonials */
-  .testimonial { padding: 22px 18px; }
-  .testimonial__text { font-size: 0.82rem; line-height: 1.95; padding-left: 16px; }
-
-  /* Pricing */
-  .pricing__card { padding: 24px 18px; }
-  .pricing__row-label { font-size: 0.82rem; }
-  .pricing__row-value { font-size: 0.95rem; }
-  .pricing__benefit-item { font-size: 0.8rem; padding: 8px 0; }
-
-  /* Start Flow */
-  .start-flow__steps { margin-top: 28px; }
-  .start-flow__step { padding: 18px 16px; }
-  .start-flow__step-num { width: 38px; height: 38px; font-size: 0.82rem; }
-  .start-flow__step-title { font-size: 0.88rem; }
-  .start-flow__arrow { font-size: 1.2rem; padding: 2px 0; }
-
-  /* Buttons */
-  .btn--primary {
-    padding: 16px 24px;
-    font-size: 0.88rem;
-    width: 100%;
-  }
-
-  /* Mid CTA */
-  .mid-cta { padding: 44px 0; }
-  .mid-cta__lead { font-size: 1.15rem; }
-  .mid-cta__text { font-size: 0.92rem; margin-bottom: 24px; }
-  .mid-cta .btn--primary { width: 100%; justify-content: center; font-size: 1.1rem; padding: 20px 16px; }
-
-  /* Final CTA */
-  .final-cta { padding: 48px 0; }
-  .final-cta__lead { font-size: 0.88rem; }
-  .final-cta__title { font-size: 1.15rem; }
-  .final-cta__sub { font-size: 0.85rem; margin-bottom: 28px; }
-  .final-cta__buttons { gap: 12px; }
-  .final-cta__buttons .btn { padding: 18px 20px; font-size: 0.95rem; }
-
-  /* Floating CTA */
-  .floating-cta { padding: 8px 12px; }
-  .floating-cta .btn { padding: 12px 14px; }
-  .floating-cta__btn { padding: 14px 16px !important; }
-  .floating-cta__line1 { font-size: 0.65em; }
-  .floating-cta__line2 { font-size: 1.05em; }
-
-  /* Footer */
-  .footer { padding: 32px 0 90px; }
+.floating-cta__img {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-right: 10px;
+  margin-top: -8px;
+  margin-bottom: -8px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
 }
+
+/* ========== Impact Section ========== */
+.impact {
+  background: linear-gradient(160deg, #f7f3ec 0%, #fff 40%, #f0ebe0 100%);
+  padding: 44px 0 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.impact::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 60px,
+    rgba(196,163,90,0.03) 60px,
+    rgba(196,163,90,0.03) 61px
+  );
+  pointer-events: none;
+}
+
+.impact__headline {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #2a2a2a;
+  line-height: 1.45;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.impact__headline .hl-num {
+  font-family: var(--font-en);
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: #c4a35a;
+  letter-spacing: -0.02em;
+}
+
+.impact__note {
+  font-size: 0.7rem;
+  color: #999;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.impact__sub {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #444;
+  line-height: 1.75;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.impact__stats {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.impact__stat {
+  flex: 1;
+  text-align: center;
+  max-width: 120px;
+}
+
+.impact__stat-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 10px;
+}
+
+.impact__stat-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.impact__stat-num {
+  font-family: var(--font-en);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #c4a35a;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.impact__stat-label {
+  font-size: 0.72rem;
+  color: #666;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.impact__desc {
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.85;
+  margin-bottom: 24px;
+  font-weight: 500;
+  position: relative;
+}
+
+.impact__brand {
+  position: relative;
+}
+
+.impact__brand-ruby {
+  font-size: 0.65rem;
+  color: #999;
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.impact__brand-name {
+  font-family: var(--font-en);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #2a2a2a;
+  letter-spacing: 0.08em;
+}
+
+/* ========== SP-unified (always apply mobile styles) ========== */
+html { font-size: 16px; }
+.container { padding: 0 18px; }
+.section-padding { padding: 44px 0; }
+.section-num { font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 10px; }
+.section-title { font-size: 1.35rem; line-height: 1.65; }
+.section-title--xl { font-size: 1.45rem; }
+.section-sub { font-size: 0.95rem; line-height: 1.8; }
+.section-line { width: 50px; margin: 14px auto; }
+
+.hero__bg { min-height: 100svh; padding-top: 0; }
+.hero__inner { padding: 0; }
+.hero__logo { top: 14px; left: 14px; }
+.hero__logo img { height: 40px !important; }
+.hero__points { gap: 10px; margin-top: 120px; }
+.hero__point { padding: 14px 20px; gap: 12px; }
+.hero__point-text { font-size: 0.82rem; }
+.hero__brand-img { width: 92%; max-width: 380px; margin-bottom: 20px; }
+
+.problem .section-title { font-size: 1.25rem; }
+.problem .section-sub { font-size: 1.05rem; }
+.problem__inner { padding: 24px 18px; margin-top: 24px; }
+.problem__item { padding: 14px 0; gap: 12px; }
+.problem__text { font-size: 1rem; line-height: 1.8; }
+
+.affinity__main { padding: 24px 18px; }
+.affinity__main-title { font-size: 1.1rem; line-height: 1.8; }
+.affinity__main-title .hl { font-size: 1.2rem; }
+
+.brand__desc { font-size: 0.92rem; line-height: 1.9; padding: 0 4px; }
+.brand__highlight-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
+.brand__highlight-card { padding: 14px 10px; }
+.brand__highlight-card-num { font-size: 1.4rem; }
+.brand__highlight-card-title { font-size: 0.8rem; }
+
+.var-intro__effect-item { padding: 10px 12px; }
+.var-intro__effect-text { font-size: 0.92rem; }
+
+.reason-card { margin-bottom: 32px; }
+.reason-card__header { gap: 8px; margin-bottom: 14px; }
+.reason-card__check { width: 26px; height: 26px; font-size: 0.8rem; }
+.reason-card__title { font-size: 1.05rem; line-height: 1.55; }
+.reason-card__body { padding-left: 0; font-size: 0.95rem; line-height: 1.85; }
+.reason-card__highlight { padding: 16px 0; font-size: 1.2rem; font-weight: 900; background: none; border-left: none; color: #8b1a1a; }
+
+.formula-box { padding: 20px 16px; margin: 18px 0; }
+.formula-box__title { font-size: 1.1rem; }
+.formula-box__items { flex-direction: column; gap: 5px; }
+.formula-box__item { padding: 7px 12px; font-size: 0.85rem; }
+.formula-box__operator { font-size: 1rem; }
+.formula-box__result { font-size: 0.95rem; }
+
+.data-stats { gap: 6px; margin: 16px 0; }
+.data-stat { padding: 12px 8px; }
+.data-stat__num { font-size: 1.5rem; }
+.data-stat__label { font-size: 0.72rem; }
+
+.flow__steps { margin-top: 24px; }
+.flow__step { padding: 14px 0; }
+.flow__step-num { width: 30px; height: 30px; font-size: 0.8rem; }
+.flow__step-title { font-size: 0.95rem; }
+
+
+.testimonial { padding: 20px 16px; }
+.testimonial__text { font-size: 0.92rem; line-height: 1.85; padding-left: 14px; }
+
+.pricing__card { padding: 22px 16px; }
+.pricing__row-label { font-size: 1.15rem; }
+.pricing__row-value { font-size: 1rem; }
+.pricing__benefit-item { font-size: 0.88rem; padding: 7px 0; }
+
+.start-flow__steps { margin-top: 24px; }
+.start-flow__step { padding: 16px 14px; }
+.start-flow__step-num { width: 34px; height: 34px; font-size: 0.85rem; }
+.start-flow__step-title { font-size: 0.95rem; }
+.start-flow__arrow { font-size: 1.1rem; padding: 2px 0; }
+
+.btn--primary { padding: 14px 22px; font-size: 0.95rem; width: 100%; }
+
+.mid-cta { padding: 32px 0; }
+.mid-cta__lead { font-size: 1.1rem; }
+.mid-cta__text { font-size: 0.95rem; margin-bottom: 14px; }
+.mid-cta .btn--primary { font-size: 1rem; padding: 14px 12px; }
+.mid-cta__img { width: 260px; }
+
+.offer { padding: 40px 0; }
+.offer__card { padding: 22px 16px; }
+.offer__card-title { font-size: 1.05rem; }
+.offer__benefit-img { width: 260px; margin-left: auto; margin-right: -30px; }
+.offer__benefit-title { font-size: 0.95rem; }
+.offer__bottom-title { font-size: 1.15rem; }
+.offer__btn { font-size: 1rem; padding: 14px 20px; }
+
+.final-cta { padding: 40px 0; }
+.final-cta__lead { font-size: 0.9rem; }
+.final-cta__title { font-size: 1.1rem; }
+.final-cta__buttons .btn { padding: 14px 16px; font-size: 0.95rem; }
+.final-cta__img { width: 120px; }
+
+.form-section { padding: 36px 0 48px; }
+.form-section__title { font-size: 1.1rem; }
+.form-section__sub { font-size: 0.82rem; }
+
+.floating-cta__img { width: 160px; margin-top: -30px; position: relative; z-index: 10; }
+.floating-cta__line1 { font-size: 0.7em; }
+.floating-cta__line2 { font-size: 1.1em; }
+
+/* ========== Origin (France to Japan) ========== */
+.origin {
+  background: linear-gradient(180deg, #e8edf4 0%, #dce4ef 100%);
+  padding: 48px 0 40px;
+  text-align: center;
+}
+
+.origin__title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #2a4a7a;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.origin__desc {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: #3a4a5a;
+  margin-bottom: 24px;
+}
+
+.origin__subtitle {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #1a2a4a;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+
+.origin__map {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.origin__map-bg {
+  position: relative;
+  background: radial-gradient(ellipse at center, rgba(180,200,220,0.25) 0%, rgba(220,230,240,0.1) 70%, transparent 100%);
+  padding: 24px 16px 32px;
+  min-height: 180px;
+}
+
+.origin__flight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.origin__flag {
+  width: 44px;
+  height: 30px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.origin__flight-path {
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+
+.origin__plane {
+  font-size: 1.4rem;
+  color: #3a5a7a;
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-15deg);
+}
+
+.origin__photos-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.origin__photos-left,
+.origin__photos-right {
+  display: flex;
+  gap: 10px;
+}
+
+.origin__photo {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.origin__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ========== Problem Visual ========== */
+.problem-visual {
+  position: relative;
+  background: linear-gradient(160deg, #c9b88e 0%, #baa97a 50%, #a89868 100%);
+  padding: 40px 20px 48px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.problem-visual::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cpath d='M10 0Q20 25 50 15Q35 50 70 40Q55 80 90 70Q75 110 110 100Q95 140 130 130Q115 170 150 160Q135 200 170 190Q155 230 190 220Q175 260 210 250Q195 290 230 280M0 30Q25 40 10 65Q40 55 25 85Q50 80 40 110Q65 100 55 130Q80 120 70 150Q95 140 85 170M270 10Q290 30 280 50Q265 45 255 70Q285 80 270 100Q255 95 245 120Q280 130 265 150' fill='none' stroke='rgba(90,70,30,0.12)' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.problem-visual__dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.problem-visual__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #4a3a1a;
+}
+
+.problem-visual__title {
+  font-family: var(--font-ja);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #2a1a05;
+  line-height: 1.45;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.04em;
+}
+
+.problem-visual__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 8px;
+  position: relative;
+  z-index: 1;
+  padding: 0 30px;
+  max-width: 72%;
+}
+
+.problem-visual__item {
+  text-align: center;
+}
+
+.problem-visual__circle {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 8px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+
+.problem-visual__circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.problem-visual__label {
+  font-family: var(--font-ja);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2a1a05;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+
+.problem-visual__row2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 8px;
+  padding-top: 14px;
+  max-width: 60%;
+  position: relative;
+  z-index: 1;
+  padding-left: 10px;
+}
+
+.problem-visual__person {
+  position: absolute;
+  bottom: 0;
+  right: -80px;
+  width: 60%;
+  max-width: 270px;
+  z-index: 2;
+}
+
+.problem-visual__person img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Footer */
+.footer { padding: 32px 0 90px; }
 
 /* ========== Fade-up Animation ========== */
 .fade-up {
@@ -1996,75 +2550,156 @@ ul { list-style: none; }
 
 <!-- ==================== HERO ==================== -->
 <section class="hero" id="hero">
-  <!-- Background Image -->
   <div class="hero__bg">
-    <img src="VAR%20OFFRE%20MKTG.png" alt="VAR Visible Age Reverse Treatment">
-  </div>
+    <video class="hero__video" autoplay loop muted playsinline>
+      <source src="images/MV.mp4" type="video/mp4">
+    </video>
+    <div class="hero__logo">
+      <img src="images/GUINOT_logo.png" alt="GUINOT">
+    </div>
 
-  <div class="container">
-    <div class="hero__inner">
-      <div class="hero__logo">
-        <img src="https://guinot.co.jp/wp-content/themes/guinot-v-06/img/logo.png" alt="GUINOT" style="height:28px;width:auto;filter:brightness(0) invert(1);opacity:0.9;">
-      </div>
-      <h1 class="hero__title">
-        <span class="hero__title-main">30分1回で<br>お肌の変化を実感</span>
-        <span class="hero__title-sub">アンチエイジングに革命を起こす<br>フェイシャルマシン<strong> VAR</strong></span>
-      </h1>
+    <div class="container">
+      <div class="hero__inner">
+        <p class="hero__france-badge">フランス国内シェアNO.1ブランド</p>
+        <h1 class="hero__title">
+          <img src="images/visible%20age%20reverse%20VECTO_cropped.png" alt="VISIBLE AGE REVERSE" class="hero__brand-img">
+          <span class="hero__title-main">30分1回で<br>お肌の変化を実感</span>
+          <span class="hero__title-sub">アンチエイジングに革命を起こす<br>フェイシャルマシン</span>
+        </h1>
 
-      <!-- Icon badges -->
-      <div class="hero__icons">
-        <div class="hero__icon-badge">
-          <span class="hero__icon-badge-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="#8b1a1a" opacity=".15"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#c4a35a"/><path d="M14.5 7.5L12 12l2.5 4.5M9.5 7.5L12 12 9.5 16.5M5 12h14" stroke="#c4a35a" stroke-width="1" opacity=".5"/></svg></span>
-          <span class="hero__icon-badge-text"><strong>No.1</strong>フランス<br>シェア</span>
+      <!-- Point badges -->
+      <div class="hero__points">
+        <div class="hero__point">
+          <span class="hero__point-label">POINT</span><span class="hero__point-num">01</span>
+          <span class="hero__point-text">フランス発 No.1エステティックブランド</span>
         </div>
-        <div class="hero__icon-badge">
-          <span class="hero__icon-badge-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1-.25 1.94-.7 2.77l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1 .25-1.94.7-2.77L5.24 7.77C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z" fill="#c4a35a"/></svg></span>
-          <span class="hero__icon-badge-text"><strong>90%</strong>リピート率</span>
+        <div class="hero__point">
+          <span class="hero__point-label">POINT</span><span class="hero__point-num">02</span>
+          <span class="hero__point-text">30分1回で実感。リピート率90%以上</span>
         </div>
-        <div class="hero__icon-badge">
-          <span class="hero__icon-badge-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="13" r="8" fill="#8b1a1a" opacity=".15"/><circle cx="12" cy="13" r="8" stroke="#c4a35a" stroke-width="1.5"/><path d="M12 7v6l4 2" stroke="#c4a35a" stroke-width="1.5" stroke-linecap="round"/><path d="M9 2h6" stroke="#c4a35a" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-          <span class="hero__icon-badge-text"><strong>0</strong>ダウンタイム</span>
-        </div>
-        <div class="hero__icon-badge">
-          <span class="hero__icon-badge-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" fill="#8b1a1a" opacity=".15"/><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" stroke="#c4a35a" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#c4a35a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span class="hero__icon-badge-text"><strong>0</strong>肌トラブル</span>
-        </div>
-        <div class="hero__icon-badge">
-          <span class="hero__icon-badge-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 8c.7-2.2.3-4.4-1.2-5.5-1.5-1.2-3.8-.9-5.2.6C9.2 1.7 7 1.4 5.4 2.6 3.9 3.7 3.5 5.9 4.2 8c-2.4.7-4.2 2.6-4.2 4.8 0 3 3.1 5.2 7 5.2h.5C8.7 20.8 10.2 22 12 22s3.3-1.2 4.5-4h.5c3.9 0 7-2.2 7-5.2 0-2.2-1.8-4.1-4.2-4.8z" fill="#8b1a1a" opacity=".12"/><path d="M6.5 12c0 0 2-3 5.5-3s5.5 3 5.5 3" stroke="#c4a35a" stroke-width="1.2" stroke-linecap="round"/><path d="M12 9v8M12 9c-1.5-2-3.5-3-5-2.5M12 9c1.5-2 3.5-3 5-2.5" stroke="#c4a35a" stroke-width="1.2" stroke-linecap="round"/></svg></span>
-          <span class="hero__icon-badge-text">アトピー肌<br>敏感肌もOK</span>
+        <div class="hero__point">
+          <span class="hero__point-label">POINT</span><span class="hero__point-num">03</span>
+          <span class="hero__point-text">世界76カ国 17,000店舗以上の導入実績</span>
         </div>
       </div>
     </div>
   </div>
+  </div>
 </section>
+
+<!-- ==================== IMPACT ==================== -->
+<section class="impact" id="impact">
+  <div class="container">
+    <h2 class="impact__headline fade-up">リピート率<span class="hl-num">90</span>%以上<br>が効果を実感</h2>
+    <p class="impact__note fade-up">※GUINOT社調べ</p>
+
+    <p class="impact__sub fade-up">世界76カ国で導入されている<br>話題のフェイシャルマシンが<br>日本に上陸</p>
+
+    <div class="impact__stats fade-up">
+      <div class="impact__stat">
+        <div class="impact__stat-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="20" stroke="#c4a35a" stroke-width="1.5" opacity=".3"/>
+            <path d="M24 8v16l8 8" stroke="#c4a35a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="24" r="20" stroke="#c4a35a" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="impact__stat-num">30分×1回</div>
+        <div class="impact__stat-label">で効果を実感</div>
+      </div>
+
+      <div class="impact__stat">
+        <div class="impact__stat-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke="#c4a35a" stroke-width="1.2"/>
+            <ellipse cx="24" cy="24" rx="8" ry="18" stroke="#c4a35a" stroke-width="1"/>
+            <path d="M6 24h36M8 16h32M8 32h32" stroke="#c4a35a" stroke-width=".8" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="impact__stat-num">世界76カ国</div>
+        <div class="impact__stat-label">17,000+店舗に導入</div>
+      </div>
+
+      <div class="impact__stat">
+        <div class="impact__stat-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 26c0 0-1-8 10-14 11 6 10 14 10 14" stroke="#c4a35a" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M24 12v22M18 18c2-2 4-3 6-3s4 1 6 3M16 24c2.5-1.5 5-2 8-2s5.5.5 8 2" stroke="#c4a35a" stroke-width="1" stroke-linecap="round" opacity=".7"/>
+            <path d="M20 38h8" stroke="#c4a35a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="24" cy="40" r="2" fill="#c4a35a" opacity=".3"/>
+          </svg>
+        </div>
+        <div class="impact__stat-num">90%以上</div>
+        <div class="impact__stat-label">がリピート</div>
+      </div>
+    </div>
+
+    <p class="impact__desc fade-up">フランスの美容整形外科技術を<br>エステティック向けに最適化した<br>「安全性と効率性」をそろえた<br>フェイシャルマシン</p>
+
+    <div class="impact__brand fade-up">
+      <img src="images/visible%20age%20reverse%20VECTO_cropped.png" alt="VISIBLE AGE REVERSE" style="width:90%;max-width:380px;margin:0 auto;display:block;">
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== PROBLEM VISUAL ==================== -->
+<section class="problem-visual fade-up">
+  <h2 class="problem-visual__title">お客様でこのような肌トラブル<br>ありませんか？</h2>
+  <div class="problem-visual__grid">
+    <div class="problem-visual__item">
+      <div class="problem-visual__circle"><img src="images/trouble01.jpg" alt="深いシワ"></div>
+      <p class="problem-visual__label">深いシワ</p>
+    </div>
+    <div class="problem-visual__item">
+      <div class="problem-visual__circle"><img src="images/trouble03.jpg" alt="毛穴"></div>
+      <p class="problem-visual__label">毛穴</p>
+    </div>
+  </div>
+  <div class="problem-visual__row2">
+    <div class="problem-visual__item">
+      <div class="problem-visual__circle"><img src="images/trouble04.jpg" alt="ニキビ跡"></div>
+      <p class="problem-visual__label">ニキビ跡</p>
+    </div>
+    <div class="problem-visual__item">
+      <div class="problem-visual__circle"><img src="images/trouble05.jpg" alt="クレーター"></div>
+      <p class="problem-visual__label">クレーター</p>
+    </div>
+  </div>
+  <div class="problem-visual__person">
+    <img src="images/trouble_lady.png" alt="">
+  </div>
+</section>
+
+<!-- Arrow: problem-visual → problem -->
+<div class="section-arrow section-arrow--skin">
+  <span class="section-arrow__triangle section-arrow__triangle--skin"></span>
+</div>
 
 <!-- ==================== PROBLEM ==================== -->
 <section class="problem section-padding" id="problem">
   <div class="container text-center">
-    <p class="section-num">PROBLEMS</p>
-    <h2 class="section-title">このようなお悩みを<br>お持ちの<br>サロンオーナー様へ</h2>
-    <hr class="section-line">
     <div class="problem__inner fade-up">
       <div class="problem__list">
         <div class="problem__item">
           <span class="problem__check"></span>
-          <p class="problem__text">最近、<strong>美容クリニックにお客様が流れている</strong>気がする</p>
+          <p class="problem__text">最近、<br><strong>美容クリニックにお客様が<br>流れている</strong>気がする</p>
         </div>
         <div class="problem__item">
           <span class="problem__check"></span>
-          <p class="problem__text">エステサロンで<strong>癒しの提供だけでは選ばれにくくなっている</strong></p>
+          <p class="problem__text">エステサロンで<br><strong>癒しの提供だけでは<br>選ばれにくくなっている</strong></p>
         </div>
         <div class="problem__item">
           <span class="problem__check"></span>
-          <p class="problem__text">年齢肌やたるみ・ハリ不足などのお悩みを抱えるお客様に<strong>もっと結果の出るメニューを届けたい</strong></p>
+          <p class="problem__text">年齢肌やたるみ・ハリ不足などの<br>お悩みを抱えるお客様に<br><strong>もっと結果の出るメニューを<br>届けたい</strong></p>
         </div>
         <div class="problem__item">
           <span class="problem__check"></span>
-          <p class="problem__text"><strong>美容医療に匹敵するフェイシャルメニュー</strong>を探している</p>
+          <p class="problem__text"><strong>美容医療に匹敵する<br>フェイシャルメニュー</strong>を探している</p>
         </div>
         <div class="problem__item">
           <span class="problem__check"></span>
-          <p class="problem__text"><strong>リピート率を上げて</strong>お客様のお肌のお悩みを解決したい</p>
+          <p class="problem__text"><strong>リピート率を上げて</strong><br>お客様のお肌のお悩みを解決したい</p>
         </div>
       </div>
     </div>
@@ -2081,15 +2716,16 @@ ul { list-style: none; }
   <div class="container text-center">
     <div class="affinity__main fade-up">
       <p style="font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.9;margin-bottom:20px;">
-        お客様に真摯に向き合うサロンオーナーさんこそが抱えているお悩みを
+        お客様に真摯に向き合う<br>サロンオーナーさんこそが<br>抱えているお悩みを
       </p>
       <h2 class="affinity__main-title">
         エステ発祥の地フランスでシェアNo.1<br>
-        <span class="hl">「GUINOT」の集大成<br>フェイシャルマシン VAR</span><br>
+        <span class="hl">「GUINOT」の集大成<br>フェイシャルマシン</span><br>
+        <img src="images/visible%20age%20reverse%20VECTO_cropped.png" alt="VISIBLE AGE REVERSE" style="max-width:320px;margin:8px auto;display:block;filter:brightness(0) invert(1);opacity:0.95;"><br>
         が解決します！
       </h2>
       <div class="affinity__device" style="margin-top:32px;">
-        <img src="https://guinot.co.jp/wp-content/uploads/var.png" alt="VAR フェイシャルマシン" style="max-width:55%;margin:0 auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
+        <img src="images/03-VAR_Invers%C3%A9_DET.png" alt="VAR フェイシャルマシン" style="max-width:85%;margin:0 auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
       </div>
     </div>
   </div>
@@ -2106,12 +2742,18 @@ ul { list-style: none; }
 
     <div class="brand__desc fade-up">
       <p style="margin-bottom:16px;"><strong>GUINOT（ギノー）</strong>はフランスの高級ホテル<strong>「フォーシーズンズホテルジョルジュサンクパリ」</strong>公式エステティックサロンに認定。</p>
+      <div style="margin-bottom:16px;overflow:hidden;border-radius:12px;">
+        <img src="images/232783611.jpg" alt="フォーシーズンズホテル" style="width:100%;border-radius:12px;object-fit:cover;aspect-ratio:16/9;display:block;">
+      </div>
       <p style="margin-bottom:16px;">世界的に有名な高級リゾート<strong>「アマンリゾート」</strong>、豪華客船<strong>「クイーンヴィクトリア号」</strong>で公式エステティックブランドとして採用。</p>
+      <div style="margin-bottom:16px;overflow:hidden;border-radius:12px;">
+        <img src="images/image_02.png" alt="アマンリゾート" style="width:100%;border-radius:12px;object-fit:cover;aspect-ratio:16/9;display:block;">
+      </div>
       <p>フランスを拠点に日本、アジアを含む<strong>世界76カ国17,000店舗以上</strong>のスパ・エステティックサロンに導入されているプロフェッショナルスキンケアブランドです。</p>
     </div>
 
     <div class="brand__hotels fade-up" style="margin-top:32px;">
-      <div class="brand__hotel-placeholder">ホテルや豪華客船のイメージ写真</div>
+      <img src="images/roppongi-salon01.jpg" alt="サロンイメージ" style="width:100%;border-radius:12px;object-fit:cover;aspect-ratio:16/9;object-position:center 30%;">
     </div>
 
     <div class="brand__highlight-cards fade-up">
@@ -2132,12 +2774,12 @@ ul { list-style: none; }
 <!-- ==================== VAR INTRO ==================== -->
 <section class="var-intro section-padding" id="var-intro">
   <div class="container text-center">
-    <p class="section-num">VAR</p>
-    <h2 class="section-title section-title--xl">VARは<br>エイジングケアに特化した<br>GUINOTの集大成<br>フェイシャルマシンです</h2>
+    <div style="margin-bottom:16px;"><img src="images/visible%20age%20reverse%20VECTO_cropped.png" alt="VISIBLE AGE REVERSE" style="max-width:320px;margin:0 auto;display:block;"></div>
+    <h2 class="section-title section-title--xl">エイジングケアに特化した<br>GUINOTの集大成<br>フェイシャルマシンです</h2>
     <hr class="section-line">
 
     <div class="var-intro__device fade-up">
-      <img src="https://guinot.co.jp/wp-content/uploads/var.png" alt="VAR フェイシャルマシン" style="max-width:60%;margin:0 auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.15));">
+      <img src="images/03-VAR_Invers%C3%A9_DET.png" alt="VAR フェイシャルマシン" style="max-width:95%;margin:0 auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.15));">
     </div>
 
     <p class="section-sub fade-up" style="margin-bottom:8px;font-weight:700;font-size:1.1rem;color:var(--color-primary);">
@@ -2151,11 +2793,11 @@ ul { list-style: none; }
       <div class="var-intro__effect-list">
         <div class="var-intro__effect-item">
           <span class="var-intro__effect-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z" fill="#8b1a1a"/><path d="M18 14l.75 2.25L21 17l-2.25.75L18 20l-.75-2.25L15 17l2.25-.75L18 14z" fill="#8b1a1a" opacity=".6"/><path d="M5 14l.75 2.25L8 17l-2.25.75L5 20l-.75-2.25L2 17l2.25-.75L5 14z" fill="#8b1a1a" opacity=".4"/></svg></span>
-          <span class="var-intro__effect-text">シワが浅くなり、リフトアップ・小顔・目がパッチリ</span>
+          <span class="var-intro__effect-text">シワが浅くなり、<br>リフトアップ・小顔・目がパッチリ</span>
         </div>
         <div class="var-intro__effect-item">
           <span class="var-intro__effect-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3h12l4 7-10 12L2 10l4-7z" fill="#8b1a1a" opacity=".12"/><path d="M6 3h12l4 7-10 12L2 10l4-7z" stroke="#8b1a1a" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10h20M6 3l4 7M18 3l-4 7M10 10L12 22M14 10L12 22" stroke="#8b1a1a" stroke-width="1" opacity=".5"/></svg></span>
-          <span class="var-intro__effect-text">肌が奥からふっくらハリが出て、表面はつやつや</span>
+          <span class="var-intro__effect-text">肌が奥からふっくらハリが出て、<br>表面はつやつや</span>
         </div>
         <div class="var-intro__effect-item">
           <span class="var-intro__effect-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="5" fill="#8b1a1a" opacity=".15"/><circle cx="12" cy="12" r="5" stroke="#8b1a1a" stroke-width="1.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M19.07 4.93l-2.12 2.12M7.05 16.95l-2.12 2.12" stroke="#8b1a1a" stroke-width="1.2" stroke-linecap="round"/></svg></span>
@@ -2163,12 +2805,14 @@ ul { list-style: none; }
         </div>
         <div class="var-intro__effect-item">
           <span class="var-intro__effect-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="#8b1a1a" opacity=".12"/><circle cx="12" cy="8" r="4" stroke="#8b1a1a" stroke-width="1.5"/><path d="M5 20c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="#8b1a1a" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-          <span class="var-intro__effect-text">首のシワも浅くなることで細くなり、小顔効果大</span>
+          <span class="var-intro__effect-text">首のシワも浅くなることで<br>細くなり、小顔効果大</span>
         </div>
       </div>
     </div>
 
-    <div class="var-intro__image-placeholder fade-up">効果のイメージ写真</div>
+    <div class="fade-up" style="margin-top:32px;">
+      <img src="images/INSTA-JDM-FR-pas encore programmé.png" alt="VAR施術イメージ" style="width:100%;border-radius:12px;object-fit:cover;aspect-ratio:3/2;">
+    </div>
   </div>
 </section>
 
@@ -2190,7 +2834,33 @@ ul { list-style: none; }
       <div class="reason-card__body">
         <p>ギノーの製品は、フランスの自社研究所から作り出されています。製造工場は医薬品やワクチンの製造が可能なレベルを有し、科学的根拠を持って独自の専用セラムを開発。</p>
         <p>加齢と共に衰えてくる細胞に効果的な<strong>「56種類の細胞活性成分」</strong>が濃縮されており、細胞を再生、エイジングケアへの効果が期待できます。</p>
-        <div class="reason-card__inner-placeholder">専用セラム写真</div>
+        <div style="margin:20px 0;border-radius:8px;overflow:hidden;">
+          <img src="images/cosme.png" alt="GUINOT コスメ" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 75%;display:block;transform:scale(1.15);">
+        </div>
+        <div class="lab-section" style="margin:28px 0;padding:28px 20px;background:#f8f7f5;border-radius:12px;">
+          <h4 style="font-size:1.15rem;font-weight:900;color:#1a1a1a;margin-bottom:16px;padding:6px 12px;background:linear-gradient(90deg,#e8e0d0,transparent);display:inline-block;border-left:4px solid #8b1a1a;">医薬品製造レベルの自社研究所</h4>
+          <div style="margin:16px 0;border-radius:8px;overflow:hidden;">
+            <img src="images/concept-04.png" alt="コンセプト" style="width:100%;display:block;">
+          </div>
+          <p style="font-size:0.88rem;line-height:1.8;color:#333;margin-bottom:20px;">ギノーの製品は、美容の最前線である自社研究所から作り出されています。ギノー研究所は、ベリタス国際認証局によって発行された2つの品質基準によって認証された数少ない化粧品製造施設の1つです。</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;margin:0 auto 10px;background:linear-gradient(135deg,#e8e4dc,#f5f3ef);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                <span style="font-size:0.6rem;font-weight:900;color:#4a6a4a;line-height:1.2;text-align:center;">ISO<br>22716</span>
+              </div>
+              <p style="font-size:0.9rem;font-weight:900;color:#1a1a1a;margin-bottom:8px;">ISO22716認証</p>
+              <p style="font-size:0.75rem;line-height:1.7;color:#444;text-align:left;">ギノーは、製薬基準の精度と厳密さを備えた製品の製造を開発しています。</p>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:80px;height:80px;margin:0 auto 10px;background:linear-gradient(135deg,#dce8dc,#eef5ee);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                <span style="font-size:0.6rem;font-weight:900;color:#4a6a4a;line-height:1.2;text-align:center;">ISO<br>14001</span>
+              </div>
+              <p style="font-size:0.9rem;font-weight:900;color:#1a1a1a;margin-bottom:8px;">ISO14001認証</p>
+              <p style="font-size:0.75rem;line-height:1.7;color:#444;text-align:left;">ISO14001規格は、企業の活動に関連する影響を管理し、環境パフォーマンスを継続的に改善する原則に基づいています。</p>
+            </div>
+          </div>
+        </div>
+
         <div class="reason-card__highlight">
           そして、その成分の浸透を最大限に引き出すための機器がこのVARです
         </div>
@@ -2242,7 +2912,9 @@ ul { list-style: none; }
 
         <p style="margin-top:20px;">専用セラムの塗布とVARの使用で、肌温度が43℃以上になったと脳に錯覚を起こし、熱を冷ます為に「血流を一気に早める」指令を脳が出すことで細胞レベルでの変化が可能に。</p>
 
-        <div class="reason-card__inner-placeholder">肌内部のイメージ図</div>
+        <div style="margin:20px 0;border-radius:8px;overflow:hidden;">
+          <img src="images/Coupe de Peau 2021-RIDE-Action Serum.png" alt="セラム浸透イメージ" style="width:100%;aspect-ratio:4/3;object-fit:contain;background:#f5f3ef;display:block;">
+        </div>
 
         <div class="reason-card__highlight">
           肌の奥からハリが出ることで、シワが浅くなり、お肌のトーンアップを実感。<br>
@@ -2251,7 +2923,9 @@ ul { list-style: none; }
 
         <p>注射やメスを使わないため、ダウンタイムがほぼなく、リラックスしながら本格的なエイジングケアが受けられます。</p>
 
-        <div class="reason-card__inner-placeholder">施術イメージ写真</div>
+        <div style="margin:20px 0;border-radius:8px;overflow:hidden;">
+          <img src="images/image_03.png" alt="フェイシャル施術のイメージ" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
+        </div>
       </div>
     </div>
 
@@ -2263,12 +2937,12 @@ ul { list-style: none; }
       </div>
       <div class="reason-card__body">
         <p>VARは2種類のエレクトロード機器で肌にアプローチ。</p>
-
-        <div class="reason-card__inner-placeholder">マシンの振動の動画</div>
-
         <p>アトピー肌などの敏感肌でも肌トラブルがゼロ。妊婦さんにも安心して施術可能です。</p>
 
-        <div class="reason-card__inner-placeholder">女性の肌の施術写真</div>
+        <div style="margin:20px 0;border-radius:8px;overflow:hidden;">
+          <img src="images/VAR OFFRE MKTG.png" alt="VAR施術イメージ" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 70%;display:block;">
+        </div>
+
       </div>
     </div>
   </div>
@@ -2283,7 +2957,9 @@ ul { list-style: none; }
       <hr class="section-line">
     </div>
 
-    <div class="flow__video-placeholder fade-up">施術動画</div>
+    <div class="fade-up" style="margin-top:36px;border-radius:12px;overflow:hidden;">
+      <img src="images/about-img01.png" alt="フェイシャル施術の流れ" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;">
+    </div>
 
     <div class="flow__steps fade-up">
       <div class="flow__step">
@@ -2344,11 +3020,10 @@ ul { list-style: none; }
       <article class="result-ba__case">
         <div class="result-ba__pair">
           <div class="result-ba__photo">
-            <span class="result-ba__placeholder">Before</span>
-            <span class="result-ba__label result-ba__label--before">Before</span>
+            <img src="images/症例/CURE-VAR-AVANT-APRES-BEATRICE-04.png" alt="症例写真 Beatrice - Before/After">
           </div>
-          <div class="result-ba__photo">
-            <span class="result-ba__placeholder">After</span>
+          <div class="result-ba__labels">
+            <span class="result-ba__label result-ba__label--before">Before</span>
             <span class="result-ba__label result-ba__label--after">After</span>
           </div>
         </div>
@@ -2356,11 +3031,10 @@ ul { list-style: none; }
       <article class="result-ba__case">
         <div class="result-ba__pair">
           <div class="result-ba__photo">
-            <span class="result-ba__placeholder">Before</span>
-            <span class="result-ba__label result-ba__label--before">Before</span>
+            <img src="images/症例/INSTA-JDM-FR-25-07-2023.png" alt="症例写真 - Before/After">
           </div>
-          <div class="result-ba__photo">
-            <span class="result-ba__placeholder">After</span>
+          <div class="result-ba__labels">
+            <span class="result-ba__label result-ba__label--before">Before</span>
             <span class="result-ba__label result-ba__label--after">After</span>
           </div>
         </div>
@@ -2368,11 +3042,10 @@ ul { list-style: none; }
       <article class="result-ba__case">
         <div class="result-ba__pair">
           <div class="result-ba__photo">
-            <span class="result-ba__placeholder">Before</span>
-            <span class="result-ba__label result-ba__label--before">Before</span>
+            <img src="images/症例/VAR-AVANT-APRES-FLORENCE.jpg" alt="症例写真 Florence - Before/After">
           </div>
-          <div class="result-ba__photo">
-            <span class="result-ba__placeholder">After</span>
+          <div class="result-ba__labels">
+            <span class="result-ba__label result-ba__label--before">Before</span>
             <span class="result-ba__label result-ba__label--after">After</span>
           </div>
         </div>
@@ -2385,11 +3058,13 @@ ul { list-style: none; }
 <section class="mid-cta" id="cta-mid">
   <div class="container">
     <div class="mid-cta__inner">
-      <p class="mid-cta__lead">まずはVARの変化を<br>あなたの肌でご体感ください</p>
-      <p class="mid-cta__text">無料体験のお申し込みはこちら</p>
-      <a href="#contact" class="btn btn--primary">
-        資料請求・無料体験に申し込む <span class="arrow">&rarr;</span>
-      </a>
+      <div class="mid-cta__content">
+        <p class="mid-cta__lead">まずはVARの変化を<br>あなたの肌でご体感ください</p>
+        <p class="mid-cta__text">無料体験のお申し込みはこちら</p>
+        <a href="#form" class="btn btn--primary">
+          資料請求・無料体験に申し込む <span class="arrow">&rarr;</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -2404,56 +3079,76 @@ ul { list-style: none; }
     </div>
 
     <!-- Reason 1 -->
-    <div class="five-reason fade-up" style="margin-top:48px;">
-      <div class="five-reason__num">01</div>
-      <h3 class="five-reason__title">60年以上の歴史と実績あるブランド<br>「GUINOT（ギノー）」が開発</h3>
-      <div class="five-reason__text">
-        <p>エステ発祥の地フランスでシェアNo.1。高級ホテルや高級リゾート、豪華客船でも公式ブランドとして採用。エステティックにおけるトップブランドとして、世界76ヵ国、17,000店のサロンやスパに導入され、世界中の多くの方々にギノーの美容を実感いただいております。</p>
-        <p>信頼と実績のあるブランドだからこそ、安心・自信を持ってお客様にご提供できます。</p>
+    <div class="five-reason fade-up">
+      <div class="five-reason__img">
+        <img src="images/about-img04.png" alt="GUINOT" style="object-fit: cover;">
+      </div>
+      <div class="five-reason__body">
+        <div class="five-reason__num">01</div>
+        <h3 class="five-reason__title">60年以上の歴史と実績あるブランド<br>「GUINOT（ギノー）」が開発</h3>
+        <div class="five-reason__text">
+          <p>エステ発祥の地フランスでシェアNo.1。高級ホテルや高級リゾート、豪華客船でも公式ブランドとして採用。世界76ヵ国、17,000店のサロンやスパに導入されています。</p>
+          <p>信頼と実績のあるブランドだからこそ、安心・自信を持ってお客様にご提供できます。</p>
+        </div>
       </div>
     </div>
 
     <!-- Reason 2 -->
     <div class="five-reason fade-up">
-      <div class="five-reason__num">02</div>
-      <h3 class="five-reason__title">リピート率は90%以上！<br>30分1回で実感できる結果</h3>
-      <div class="five-reason__text">
-        <p>①独自の電流（V-Electric） ②精密な振動 ③56種類の細胞活性成分配合の専用美容液 &mdash; これらが肌の再生力を促進。</p>
-        <p>1回30分で目に見える変化を実感。そのため、また受けたいと思える満足感で90%以上の高リピート率を実現。持続力も高いため、翌日以降の肌も良く、お客様との信頼構築につながっています。</p>
+      <div class="five-reason__img">
+        <img src="images/image_04.png" alt="施術結果" style="transform:scale(1.2);transform-origin:center center;">
+      </div>
+      <div class="five-reason__body">
+        <div class="five-reason__num">02</div>
+        <h3 class="five-reason__title">リピート率は90%以上！<br>30分1回で実感できる結果</h3>
+        <div class="five-reason__text">
+          <p>①独自の電流（V-Electric） ②精密な振動 ③56種類の細胞活性成分配合の専用美容液 &mdash; これらが肌の再生力を促進。</p>
+          <p>1回30分で目に見える変化を実感。90%以上の高リピート率を実現しています。</p>
+        </div>
       </div>
     </div>
 
     <!-- Reason 3 -->
     <div class="five-reason fade-up">
-      <div class="five-reason__num">03</div>
-      <h3 class="five-reason__title">どんなお客様でも安心して受けられる</h3>
-      <div class="five-reason__text">
-        <p>肌トラブル0、ダウンタイムなし、敏感肌のお客様や妊婦様にも安心してご提供できます。</p>
+      <div class="five-reason__img">
+        <img src="images/face.png" alt="フェイシャル施術" style="object-fit: cover;">
+      </div>
+      <div class="five-reason__body">
+        <div class="five-reason__num">03</div>
+        <h3 class="five-reason__title">どんなお客様でも<br>安心して受けられる</h3>
+        <div class="five-reason__text">
+          <p>肌トラブル0、ダウンタイムなし、敏感肌のお客様や妊婦様にも安心してご提供できます。</p>
+        </div>
       </div>
     </div>
 
     <!-- Reason 4 -->
     <div class="five-reason fade-up">
-      <div class="five-reason__num">04</div>
-      <h3 class="five-reason__title">継続プランでサロン経営の安定化</h3>
-      <div class="five-reason__text">
-        <p>VARなら、継続プランの成約率が高い。単発メニューから継続コースのご成約でサロン経営の安定化に繋がります。</p>
+      <div class="five-reason__img">
+        <img src="images/shop-img.png" alt="サロン店舗">
       </div>
-      <div class="pricing__example" style="margin-top:20px;">
-        <p class="pricing__example-title">メニュー例</p>
-        <p class="pricing__example-text">
-          単発22,000円で1回のみ &rarr; <span class="pricing__example-highlight">5回コース契約88,000円</span>
-        </p>
+      <div class="five-reason__body">
+        <div class="five-reason__num">04</div>
+        <h3 class="five-reason__title">継続プランで<br>サロン経営の安定化</h3>
+        <div class="five-reason__text">
+          <p>VARなら、継続プランの成約率が高い。単発メニューから継続コースのご成約でサロン経営の安定化に繋がります。</p>
+          <p style="margin-top:8px; padding:8px 12px; background:rgba(182,18,58,0.06); border-radius:6px; font-size:0.75rem; color:var(--color-primary);"><strong>メニュー例：</strong>単発22,000円 &rarr; 5回コース88,000円</p>
+        </div>
       </div>
     </div>
 
     <!-- Reason 5 -->
     <div class="five-reason fade-up">
-      <div class="five-reason__num">05</div>
-      <h3 class="five-reason__title">導入後のアフターフォローが充実</h3>
-      <div class="five-reason__text">
-        <p>初導入時の研修からカウンセリングトーク、資料、販促物、マーケティング画像、B&amp;A写真等も提供、導入後のフォロー体制が整っています。商品研修や技術研修も無料で受けることができ、サロン物販も充実させることができます。</p>
-        <p>売って終わり、ではなく導入後も現場経験のあるスタッフが対応します。現場目線で商品の紹介やメニュー、コース組み、サロン運営までアドバイス可能です。</p>
+      <div class="five-reason__img">
+        <img src="images/concept-01.png" alt="VAR導入サポート" style="object-fit: cover;">
+      </div>
+      <div class="five-reason__body">
+        <div class="five-reason__num">05</div>
+        <h3 class="five-reason__title">導入後のアフターフォローが充実</h3>
+        <div class="five-reason__text">
+          <p>初導入時の研修からカウンセリングトーク、資料、販促物、マーケティング画像等も提供。導入後のフォロー体制が整っています。</p>
+          <p>売って終わりではなく、現場経験のあるスタッフが対応。メニュー、コース組み、サロン運営までアドバイス可能です。</p>
+        </div>
       </div>
     </div>
   </div>
@@ -2491,44 +3186,41 @@ ul { list-style: none; }
       <hr class="section-line">
     </div>
 
-    <div class="pricing__card fade-up" style="margin-top:40px;">
-      <div class="pricing__row">
-        <span class="pricing__row-label">レンタル料</span>
-        <span class="pricing__row-value">月額49,500円<small>（税込み）</small></span>
-      </div>
-      <p class="pricing__note">&times; 最低35回</p>
-      <div class="pricing__row" style="margin-top:16px;">
-        <span class="pricing__row-label">オープニングパッケージ</span>
-        <span class="pricing__row-value">118,000円<small>（税込み）</small></span>
-      </div>
-      <p class="pricing__note">&rarr; 必要業務用商材40名〜50名分・店販商品（クリーム&times;2）</p>
+    <div class="pricing__card fade-up" style="margin-top:40px;text-align:center;">
+      <p class="pricing__row-label" style="text-align:center;margin-bottom:8px;">レンタル料</p>
+      <p class="pricing__row-value" style="text-align:center;margin-bottom:4px;">月額 <span style="font-size:1.5em;font-weight:900;">49,500</span>円<small>（税込）</small></p>
+      <p class="pricing__note" style="text-align:center;margin-bottom:24px;">※最低35回のお支払いとなります。</p>
+      <hr style="border:none;border-top:1px solid rgba(0,0,0,0.1);margin:0 0 24px;">
+      <p class="pricing__row-label" style="text-align:center;margin-bottom:8px;">オープニングパッケージ</p>
+      <p class="pricing__row-value" style="text-align:center;margin-bottom:4px;"><span style="font-size:1.5em;font-weight:900;">118,000</span>円<small>（税込）</small></p>
+      <p class="pricing__note" style="text-align:center;">&rarr; 必要業務用商材40名〜50名分・店販商品（クリーム&times;2）</p>
     </div>
 
     <div class="pricing__card fade-up" style="margin-top:0;">
-      <p class="pricing__label">成約特典</p>
+      <p class="pricing__label">ご成約特典</p>
       <div class="pricing__benefit-item">
         <span class="pricing__benefit-check">&#10003;</span>
-        <span>レンタル料初月度無料</span>
+        <span>レンタル費用が<span style="font-size:1.3em;font-weight:900;">初月度無料</span></span>
       </div>
       <div class="pricing__benefit-item">
         <span class="pricing__benefit-check">&#10003;</span>
-        <span>オープニングパッケージ割引き</span>
+        <span><strong style="font-size:1.2em;">オープニングパッケージ割引き</strong><br><small style="font-size:0.75em;color:#888;">※詳細はお問い合わせください</small></span>
       </div>
       <div class="pricing__benefit-item">
         <span class="pricing__benefit-check">&#10003;</span>
-        <span>導入研修無料（対面2時間）</span>
+        <span><strong style="font-size:1.2em;">導入研修無料</strong>（対面2時間）</span>
       </div>
       <div class="pricing__benefit-item">
         <span class="pricing__benefit-check">&#10003;</span>
-        <span>コンサントレセラムエイジインフラックス1箱（28,600円）プレゼント</span>
+        <span><strong style="font-size:1.2em;">コンサントレセラムエイジインフラックス1箱（28,600円）プレゼント</strong></span>
       </div>
       <div class="pricing__benefit-item">
         <span class="pricing__benefit-check">&#10003;</span>
-        <span>VAR関連画像、ビフォーアフター写真提供</span>
+        <span><strong style="font-size:1.2em;">VAR関連画像、ビフォーアフター写真提供</strong></span>
       </div>
       <div class="pricing__benefit-item">
         <span class="pricing__benefit-check">&#10003;</span>
-        <span>バナー（60cm&times;180cm）プレゼント</span>
+        <span><strong style="font-size:1.2em;">商品画像やバナーなど、営業支援ツール</strong>をプレゼント</span>
       </div>
     </div>
   </div>
@@ -2572,28 +3264,115 @@ ul { list-style: none; }
   </div>
 </section>
 
+<!-- ==================== OFFER ==================== -->
+<section class="offer" id="offer">
+  <div class="container">
+    <div class="offer__card fade-up">
+      <div class="offer__badge">
+        <span class="offer__badge-label">限定</span>
+        <span class="offer__badge-text">無料体験で7つの特典</span>
+      </div>
+      <h2 class="offer__card-title">体験すれば分かる、<br>VARの全てを手にいれるチャンス</h2>
+
+      <div class="offer__benefit">
+        <div class="offer__benefit-main">
+          <p class="offer__benefit-num">特典1</p>
+          <p class="offer__benefit-title">VARフェイシャルを<br>無料体験</p>
+          <p class="offer__benefit-note">※体験はサロンオーナー様ご本人に限ります</p>
+        </div>
+        <img src="images/03-VAR_Inversé_DET.png" alt="VAR" class="offer__benefit-img">
+      </div>
+
+      <div class="offer__benefit offer__benefit--outline">
+        <div class="offer__benefit-main">
+          <p class="offer__benefit-num">特典2</p>
+          <p class="offer__benefit-title">レンタル費用が<strong>初月度無料</strong></p>
+        </div>
+      </div>
+
+      <div class="offer__benefit offer__benefit--outline">
+        <div class="offer__benefit-main">
+          <p class="offer__benefit-num">特典3</p>
+          <p class="offer__benefit-title"><strong>オープニングパッケージ割引き</strong></p>
+          <p class="offer__benefit-note">※詳細はお問い合わせください</p>
+        </div>
+      </div>
+
+      <div class="offer__benefit offer__benefit--outline">
+        <div class="offer__benefit-main">
+          <p class="offer__benefit-num">特典4</p>
+          <p class="offer__benefit-title"><strong>導入研修無料</strong>（対面2時間）</p>
+        </div>
+      </div>
+
+      <div class="offer__benefit offer__benefit--outline">
+        <div class="offer__benefit-main">
+          <p class="offer__benefit-num">特典5</p>
+          <p class="offer__benefit-title">コンサントレセラムエイジインフラックス1箱（28,600円）プレゼント</p>
+        </div>
+      </div>
+
+      <div class="offer__benefit offer__benefit--outline">
+        <div class="offer__benefit-main">
+          <p class="offer__benefit-num">特典6</p>
+          <p class="offer__benefit-title">VAR関連画像、ビフォーアフター写真提供</p>
+        </div>
+      </div>
+
+      <div class="offer__benefit offer__benefit--outline">
+        <div class="offer__benefit-main">
+          <p class="offer__benefit-num">特典7</p>
+          <p class="offer__benefit-title">商品画像やバナーなど、営業支援ツールをプレゼント</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ==================== FINAL CTA ==================== -->
-<section class="final-cta" id="contact">
-  <div class="container text-center">
-    <p class="final-cta__lead fade-up">
-      まずは革新的なアンチエイジング
-    </p>
-    <h2 class="final-cta__title fade-up">
-      <span class="hl">VARをあなたのお肌で<br>ご体感ください</span>
-    </h2>
-
-    <div class="final-cta__image-placeholder fade-up">施術イメージ画像</div>
-
-    <div class="final-cta__buttons fade-up">
-      <a href="#" class="btn btn--cta-primary">
-        資料請求・お問い合わせ <span class="arrow">&rarr;</span>
-      </a>
-      <a href="#" class="btn btn--cta-secondary">
-        無料体験に申し込む <span class="arrow">&rarr;</span>
-      </a>
+<section class="mid-cta" id="contact">
+  <div class="container">
+    <div class="mid-cta__inner">
+      <div class="mid-cta__content">
+        <p class="mid-cta__lead">まずはVARの変化を<br>あなたの肌でご体感ください</p>
+        <p class="mid-cta__text">無料体験のお申し込みはこちら</p>
+        <a href="#form" class="btn btn--primary">
+          資料請求・無料体験に申し込む <span class="arrow">&rarr;</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ==================== FORM ==================== -->
+<section class="form-section" id="form">
+  <div class="container">
+    <h2 class="form-section__title fade-up">資料請求・無料体験のお申し込み</h2>
+    <p class="form-section__sub fade-up">下記フォームよりお気軽にお問い合わせください</p>
+    <div class="form-section__iframe-wrap fade-up">
+      <iframe id="rizbell-form" src="https://lfo.rizbell.com/booking/org_01KMY7M23MG8N8G9ETGJ38HG59?project=default&embed=true" width="100%" frameborder="0" scrolling="no" style="border: none; min-height: 800px; overflow: hidden;"></iframe>
+    </div>
+  </div>
+</section>
+<script src="https://lfo.rizbell.com/embed-form.js"></script>
+<script>
+(function(){
+  var iframe = document.getElementById('rizbell-form');
+  if (!iframe) return;
+  window.addEventListener('message', function(e) {
+    if (e.data && typeof e.data.height === 'number') {
+      iframe.style.height = e.data.height + 'px';
+    }
+    if (e.data && typeof e.data === 'string') {
+      try {
+        var d = JSON.parse(e.data);
+        if (d.height) iframe.style.height = d.height + 'px';
+      } catch(ex){}
+    }
+  });
+})();
+</script>
 
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
@@ -2611,11 +3390,12 @@ ul { list-style: none; }
 
 <!-- Floating CTA -->
 <div class="floating-cta">
-  <a href="#contact" class="btn btn--primary floating-cta__btn">
+  <a href="#form" class="floating-cta__btn">
     <span class="floating-cta__text">
       <span class="floating-cta__line1">VAR 無料体験受付中</span>
       <span class="floating-cta__line2">資料請求・無料体験はこちら</span>
     </span>
+    <img src="images/03-VAR_Inversé_DET.png" alt="VAR" class="floating-cta__img">
   </a>
 </div>
 
@@ -2634,8 +3414,8 @@ document.addEventListener('DOMContentLoaded', function() {
   els.forEach(function(el) { observer.observe(el); });
 
   var floatingCta = document.querySelector('.floating-cta');
-  var finalCta = document.querySelector('.final-cta');
-  if (floatingCta && finalCta) {
+  var formSection = document.querySelector('.form-section') || document.querySelector('.final-cta');
+  if (floatingCta && formSection) {
     var ctaObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
@@ -2645,7 +3425,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     }, { threshold: 0.15 });
-    ctaObserver.observe(finalCta);
+    ctaObserver.observe(formSection);
   }
 });
 </script>
