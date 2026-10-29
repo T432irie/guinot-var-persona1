@@ -4,3 +4,5 @@ images/*.ai
 images/MV_movie.mp4
 _backup_persona1/
 persona_3/
+.vercel
+.env*.local
