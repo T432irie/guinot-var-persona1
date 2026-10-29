@@ -76,8 +76,15 @@ h1, h2, h3, p, dd, li { word-break: auto-phrase; line-break: strict; }
 .hero { position: relative; overflow: hidden; background: radial-gradient(ellipse at 30% 15%, rgba(212,175,110,.28), transparent 42%), radial-gradient(ellipse at 78% 80%, rgba(182,18,58,.4), transparent 48%), #5c0e1c; }
 .hero__glow { position: absolute; inset: -30% -10%; background: linear-gradient(115deg, transparent 36%, rgba(255,255,255,.22) 50%, transparent 64%); animation: sweep 8s ease-in-out infinite; pointer-events: none; }
 @keyframes sweep { 0% { transform: translateX(-28%); } 100% { transform: translateX(28%); } }
-.hero__poster { position: relative; z-index: 1; display: block; }
-.hero__poster img { width: 100%; height: auto; display: block; }
+.hero__poster { position: relative; z-index: 1; display: block; background: #5c0e1c; }
+.hero__poster img, .hero__poster .hero__video { width: 100%; height: auto; display: block; }
+.hero__video { object-fit: cover; vertical-align: top; }
+.hero__video--landscape { display: none; }
+@media (min-width: 900px) {
+  .hero__video--portrait { display: none; }
+  .hero__video--landscape { display: block; }
+  .hero__poster .hero__video { width: 100%; height: 100%; min-height: 520px; object-fit: cover; object-position: center 40%; }
+}
 .hero__aside { display: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .is-loaded .hero__media { opacity: 1; transform: none; }
@@ -280,10 +287,14 @@ h1, h2, h3, p, dd, li { word-break: auto-phrase; line-break: strict; }
 <section class="hero" id="hero">
   <div class="hero__glow" aria-hidden="true"></div>
   <h1 class="sr-only">40代以降が求めたエステマシン。フェイシャルとエイジングケアを、30分1回で実感する。</h1>
-  <picture class="hero__poster">
-    <source srcset="images/MV_3.webp" type="image/webp">
-    <img src="images/MV_3.jpeg" alt="VAR メインビジュアル。ヨーロッパ・フランス売上No.1。30分1回で実感する体感型トリートメント。" width="681" height="1024" fetchpriority="high">
-  </picture>
+  <div class="hero__poster">
+    <video class="hero__video hero__video--portrait" autoplay muted loop playsinline poster="videos/hero-portrait-poster.jpg" width="720" height="1280" aria-label="VARの施術イメージ">
+      <source src="videos/hero-portrait.mp4" type="video/mp4">
+    </video>
+    <video class="hero__video hero__video--landscape" muted loop playsinline poster="videos/hero-landscape-poster.jpg" width="1280" height="720" aria-label="VARの施術イメージ" preload="none">
+      <source src="videos/hero-landscape.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="hero__aside">
     <p class="hero__aside-kicker">Guinot Institut · Paris</p>
     <h2>40代以降が求めた<br><span class="nb">フェイシャル×エイジングケア。</span></h2>
@@ -587,6 +598,23 @@ h1, h2, h3, p, dd, li { word-break: auto-phrase; line-break: strict; }
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  var heroWide = window.matchMedia('(min-width: 900px)');
+  var heroPortrait = document.querySelector('.hero__video--portrait');
+  var heroLandscape = document.querySelector('.hero__video--landscape');
+  function syncHeroVideo() {
+    if (!heroPortrait || !heroLandscape) return;
+    var useWide = heroWide.matches;
+    var on = useWide ? heroLandscape : heroPortrait;
+    var off = useWide ? heroPortrait : heroLandscape;
+    off.pause();
+    if (on.readyState === 0) on.load();
+    var play = on.play();
+    if (play && play.catch) play.catch(function () {});
+  }
+  if (heroWide.addEventListener) heroWide.addEventListener('change', syncHeroVideo);
+  else if (heroWide.addListener) heroWide.addListener(syncHeroVideo);
+  syncHeroVideo();
+
   document.querySelectorAll('.split').forEach(function (el) {
     var i = 0;
     (function walk(node) {
