@@ -108,7 +108,7 @@ h1, h2, h3, p, li, b { word-break: normal; overflow-wrap: break-word; line-break
 /* 動画未再生・低電力モードでもポスターが見えるよう背景にも置く */
 .hero__visual { position: absolute; inset: 0; z-index: 0; display: block; overflow: hidden; aspect-ratio: auto; margin: 0; background: #7e0013 url(videos/hero-portrait-poster.jpg) center / cover no-repeat; }
 .hero__visual img { display: none; }
-.hero__visual .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0; transition: opacity 1.2s ease; }
+.hero__visual .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0; transition: opacity .5s ease; }
 .is-loaded .hero__visual .hero__video { opacity: 1; }
 .hero__video--landscape { display: none; }
 .hero__visual::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(125,0,19,.9) 0%, rgba(137,0,21,.62) 36%, rgba(153,0,23,.32) 62%, rgba(125,0,19,.48) 100%), linear-gradient(180deg, rgba(137,0,21,.62) 0%, rgba(153,0,23,.28) 34%, rgba(113,0,17,.88) 100%); }
@@ -146,7 +146,8 @@ h1, h2, h3, p, li, b { word-break: normal; overflow-wrap: break-word; line-break
 .map-paris .pulse--2 { animation-delay: 1.4s; }
 @keyframes mapPulse { from { transform: scale(1); opacity: .85; } to { transform: scale(5.5); opacity: 0; } }
 .map-paris text { fill: #fff3dc; font-family: var(--serif-en); font-style: italic; font-weight: 600; font-size: 42px; letter-spacing: .06em; paint-order: stroke; stroke: rgba(137,0,21,.85); stroke-width: 7px; stroke-linejoin: round; }
-.hero-fade { opacity: 0; transform: translateY(16px); transition: opacity 1.4s ease, transform 1.4s var(--ease); transition-delay: var(--d, 0s); }
+/* FVは表示を待たせないよう、時間差を元の約3分の1に縮めて短く出す（全体で約1秒） */
+.hero-fade { opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s var(--ease); transition-delay: calc(var(--d, 0s) * .35); }
 .is-loaded .hero-fade { opacity: 1; transform: none; }
 
 /* ---------- 2. highlights strip (sales punch right under hero) ---------- */
@@ -701,7 +702,7 @@ html.reduce-motion .fade-up, html.reduce-motion .hero-fade { transform: none; }
         <h2 class="solve__title"><span class="solve__lead">お客様に真摯に向き合う<br class="pc-only">サロンオーナーこそが<br>抱えているお悩みを、</span><span class="solve__main"><em>GUINOTの集大成</em>が<br>解決します。</span></h2>
       </div>
       <!-- 薬事確認中 -->
-      <p class="fade-up">ヨーロッパ・フランスで売上No.1。「GUINOT」のフェイシャルマシン。</p>
+      <p class="fade-up">ヨーロッパ・フランスで売上No.1。<span class="nb">「GUINOT」のフェイシャルマシン。</span></p>
       <p class="en-name fade-up"><b>V</b>isible <b>A</b>ge <b>R</b>everse</p>
     </div>
     <figure class="solve__photo fade-up">
@@ -760,7 +761,7 @@ html.reduce-motion .fade-up, html.reduce-motion .hero-fade { transform: none; }
         </div>
       </article>
       <article class="brand-block fade-up">
-        <figure class="brand-block__img img-soft"><picture><source srcset="images/guinot-products.webp" type="image/webp"><img src="images/guinot-products.jpg" alt="GUINOTのスキンケア製品" width="884" height="590" loading="lazy"></picture></figure>
+        <figure class="brand-block__img img-soft"><picture><source srcset="images/guinot-longuevie.webp" type="image/webp"><img src="images/guinot-longuevie.jpg" alt="GUINOTのスキンケア製品「LONGUE VIE+」シリーズ" width="1600" height="1100" loading="lazy"></picture></figure>
         <div class="brand-block__card">
           <span class="tag">Point 03</span>
           <!-- 薬事確認中 -->
@@ -865,9 +866,9 @@ html.reduce-motion .fade-up, html.reduce-motion .hero-fade { transform: none; }
         <div class="exp__body">
           <span class="tag">Gentle</span>
           <!-- 薬事確認中 -->
-          <h3>敏感肌も、妊婦さんも、安心して。</h3>
+          <h3>敏感肌も、妊婦さんも、<span class="nb">安心して。</span></h3>
           <!-- 薬事確認中 -->
-          <p>注射もメスも使いません。ダウンタイムはほぼなく、肌トラブルゼロでご提供できます。</p>
+          <p>注射もメスも使いません。ダウンタイムはほぼなく、肌トラブルゼロで<span class="nb">ご提供できます。</span></p>
         </div>
       </article>
     </div>
@@ -887,9 +888,9 @@ html.reduce-motion .fade-up, html.reduce-motion .hero-fade { transform: none; }
       <!-- 薬事確認中 -->
       <div class="stat fade-up" style="--d:.2s"><b><span class="js-count" data-to="77.9" data-dec="1">77.9</span><small>%</small></b><span>表皮のハリの向上</span><i class="stat__bar" style="--v:77.9%" aria-hidden="true"></i></div>
     </div>
-    <div class="formula fade-up"><span>精密な振動</span><i>×</i><span>専用美容液の成分</span>
+    <div class="formula fade-up"><span>精密な振動</span><i>×</i><span>専用美容液の成分</span>で、
       <!-- 薬事確認中 -->
-      <p>で、肌の「再生力」を促進する。</p></div>
+      <p>肌の「再生力」を促進する。</p></div>
     <p class="note">※数値はギノー発表の試験データに基づきます。効果には個人差があります。</p>
     <div class="cta-row fade-up"><a class="btn" href="#form"><span><small>無料体験で7つの特典</small>資料請求・無料体験に申し込む</span><span class="arrow"></span></a></div>
   </div>
@@ -903,7 +904,7 @@ html.reduce-motion .fade-up, html.reduce-motion .hero-fade { transform: none; }
     </figure>
     <div>
       <!-- 薬事確認中 -->
-      <div class="head" style="margin-bottom:28px"><span class="en">Treatment</span><h2>施術は、わずか<em class="h-num"><span>30</span>分</em>。<br>その短時間で、変化を起こす。</h2></div>
+      <div class="head" style="margin-bottom:28px"><span class="en">Treatment</span><h2>施術は、わずか<em class="h-num"><span>30</span>分</em>。<br>その短時間で、<span class="nb">変化を起こす。</span></h2></div>
       <!-- 追加テキスト（ご依頼による） -->
       <p class="steps-label fade-up">誰でも簡単<em>7</em>ステップ</p>
       <ol class="steps">
@@ -990,7 +991,7 @@ html.reduce-motion .fade-up, html.reduce-motion .hero-fade { transform: none; }
         <span class="tag">Reason 03</span>
         <h3>どんなお客様でも、安心して受けられる。</h3>
         <!-- 薬事確認中 -->
-        <p>肌トラブル0、ダウンタイムなし。敏感肌のお客様や妊婦様にもご提供できます。</p>
+        <p>肌トラブル0、ダウンタイムなし。敏感肌のお客様や妊婦様にも<span class="nb">ご提供できます。</span></p>
       </article>
       <article class="reason fade-up">
         <span class="reason__num" aria-hidden="true">04</span>
@@ -1068,9 +1069,9 @@ html.reduce-motion .fade-up, html.reduce-motion .hero-fade { transform: none; }
       <li class="fade-up"><span class="en">Gift 02</span><div><b>レンタル費用が初月度無料</b></div></li>
       <li class="fade-up"><span class="en">Gift 03</span><div><b>オープニングパッケージ割引き</b><small>※詳細はお問い合わせください</small></div></li>
       <li class="fade-up"><span class="en">Gift 04</span><div><b>導入研修 無料（対面2時間）</b></div></li>
-      <li class="fade-up"><span class="en">Gift 05</span><div><b>コンサントレセラム エイジインフラックス 1箱プレゼント</b><small>28,600円（税込）</small></div></li>
+      <li class="fade-up"><span class="en">Gift 05</span><div><b>コンサントレセラム エイジインフラックス <span class="nb">1箱プレゼント</span></b><small>28,600円（税込）</small></div></li>
       <li class="fade-up"><span class="en">Gift 06</span><div><b>VAR関連画像、ビフォーアフター写真を提供</b></div></li>
-      <li class="fade-up"><span class="en">Gift 07</span><div><b>商品画像やバナーなど、営業支援ツールをプレゼント</b></div></li>
+      <li class="fade-up"><span class="en">Gift 07</span><div><b>商品画像やバナーなど、<span class="nb">営業支援ツールをプレゼント</span></b></div></li>
     </ol>
     <div class="cta-row fade-up"><a class="btn" href="#form"><span>資料請求・無料体験に申し込む</span><span class="arrow"></span></a></div>
   </div>
