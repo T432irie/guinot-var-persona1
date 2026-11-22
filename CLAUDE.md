@@ -1,0 +1,32 @@
+# VAR の LP ペルソナ1（guinot-var-persona1）
+
+ギノージャパンの美容機器 VAR の、サロンオーナー向け LP（静的な HTML。`index.html` と `images/`）。
+
+## 本番
+- 本番：https://guinot.co.jp/VAR_p1/（さくらのレンタルサーバー。FTP で上げる）
+- GitHub Pages：**main がそのまま公開される**（https://t432irie.github.io/guinot-var-persona1/）。main に入れたものはすぐ公開される
+- **このリポジトリは公開（public）**。秘密・クライアントの内部情報・未公開の素材をコミットしない
+- **本番（guinot.co.jp）への FTP は T だけが行う。** AI はデプロイのスクリプト（`~/ギノージャパン/deploy*.sh`、リポジトリの外）を実行しない
+  - `deploy.sh` は p1〜p3 を全部上書きし、`*.md` を除外しない。使わない
+
+## ブランチ
+- main に直接コミットしない。作業ごとにブランチを切って PR にする（main は ruleset で PR 必須）
+- `persona1-rebuild`：**P4**（persona_1 の作り直し）。プレビューは guinot-var-p4-preview.vercel.app、本番は https://guinot.co.jp/VAR_p4/（`~/ギノージャパン/deploy_p4.sh` で `~/ギノージャパン/persona_1-rebuild` から FTP で上げる。p1〜p3 には触らない作り）
+- `persona1-main-wip`：10/29 に main の未コミットの変更を保存したもの（`rescue/mac-mini/2026-11-21` と同じ中身）
+- `rescue/*`：2026-11-21 に救出した未 push・未コミットの作業。消さない
+
+## 残りの作業
+- P4：クライアントの原寸画像の差し替え、本番（VAR_p4）への公開（T が deploy_p4.sh を実行）
+- `rescue/*`・`persona1-main-wip` の扱いの判断（main の画像の WebP 化など。main に入れると公開サイトが変わる）
+
+## 注意
+- macOS（大文字と小文字を区別しない）では `images/CTA.jpg` と `images/cta.jpg` などがぶつかり、clone 直後から「変更あり」と表示されることがある。`git add -A` を使わず、ファイルを指定してコミットする
+- 画面を変えたら、スマホ幅（390×844）と PC 幅（1440×900）で確かめる
+
+## 守ること
+- パスワード・FTP の接続情報・トークンはファイルにもチャットにも書かない
+- 美容・医療広告として問題のある表現をしない：効果・効能の断定や保証、ビフォーアフター、効果をうたう体験談、根拠のない「No.1」「最高」などの最上級表現。数字は根拠（出典・時期）があるものだけ
+- 本番の操作は T の承認を得てから行う
+
+## 教訓
+<!-- 書式：- YYYY-MM-DD 何が起きたか → 次からどうするか -->
